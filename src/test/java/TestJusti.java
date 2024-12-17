@@ -1,6 +1,5 @@
 import justi.pages.XtbHomePage;
 import justi.pages.XtbLoginPage;
-import justi.reusable.Reusable;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.After;

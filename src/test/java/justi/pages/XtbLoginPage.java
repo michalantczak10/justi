@@ -21,13 +21,9 @@ public class XtbLoginPage {
     }
 
     public void login() {
-        try {
-            reusable.openWebsite("https://xstation5.xtb.com/#/demo/loggedIn", XTB_LOGIN_PAGE.getExpectedPageTitle());
-            reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), login, "michalantczak@outlook.com");
-            reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), password, "Michal$170188!");
-            reusable.waitForVisibilityOfElementAndClick(XTB_LOGIN_PAGE.getExpectedPageTitle(), loginButton);
-        } catch (Exception e) {
-            System.out.println(ValidationMessages.LOGIN_ERROR.getValidationMessage() + e.getMessage());
-        }
+        reusable.openWebsite("https://xstation5.xtb.com/#/demo/loggedIn", XTB_LOGIN_PAGE.getExpectedPageTitle());
+        reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), login, "michalantczak@outlook.com");
+        reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), password, "Michal$170188!");
+        reusable.waitForVisibilityOfElementAndClick(XTB_LOGIN_PAGE.getExpectedPageTitle(), loginButton);
     }
 }

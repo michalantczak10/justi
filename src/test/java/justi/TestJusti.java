@@ -1,10 +1,11 @@
+package justi;
+
 import justi.pages.XtbHomePage;
 import justi.pages.XtbLoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.jetbrains.annotations.NotNull;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 
@@ -28,8 +29,11 @@ public class TestJusti {
         quitDriver();
     }
 
-    public void tradeStrategy(@NotNull XtbLoginPage xtbLoginPage, @NotNull XtbHomePage xtbHomePage) {
+    public void tradeStrategy(XtbLoginPage xtbLoginPage, XtbHomePage xtbHomePage) {
         xtbLoginPage.login();
+        System.out.println("Trend dla EMA: " + xtbHomePage.checkEMATrend());
+        System.out.println("Trend dla RSI: " + xtbHomePage.checkRSITrend());
+
 //        if (investingPage.getIndicatorsStateSummary().equals(-1)) {
 //            if (xtbHomePage.getOpenPositionType().equals(-1)) {
 //                System.out.println("Wskaźniki wskazały trend spadkowy ...");

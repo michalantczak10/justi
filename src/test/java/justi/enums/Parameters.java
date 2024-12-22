@@ -1,15 +1,15 @@
 package justi.enums;
 
 public enum Parameters {
-    WAIT_TIME(180);
+    WAIT_TIME(30);
 
-    private final int Parameter;
+    private final int parameter;
 
     Parameters(int parameter) {
-        this.Parameter = parameter;
+        this.parameter = parameter;
     }
 
     public int getParameter() {
-        return Parameter;
+        return parameter;
     }
 }

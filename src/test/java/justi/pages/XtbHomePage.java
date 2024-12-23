@@ -20,6 +20,10 @@ public class XtbHomePage {
     public By ema5 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [5, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By ema20 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [20, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By rsi = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'RSI [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By macd = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'MACD [12, 26, 9]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By bollingerBands = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'Bollinger [20, 2.5]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By stochastic = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SO [5, 3, 3]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By adx = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'ADX [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
 
 
     public XtbHomePage(WebDriver driver) {
@@ -27,32 +31,90 @@ public class XtbHomePage {
         this.reusable = new Reusable(driver);
     }
 
-
     public String checkEMATrend() {
-        if (getIndicatorValue(ema5) > getIndicatorValue(ema20)) {
+        if (Double.parseDouble(getIndicatorValue(ema5)) > Double.parseDouble(getIndicatorValue(ema20))) {
             return "Trend wzrostowy";
-        }
-        else if (getIndicatorValue(ema5) < getIndicatorValue(ema20)) {
+        } else if (Double.parseDouble(getIndicatorValue(ema5)) < Double.parseDouble(getIndicatorValue(ema20))) {
             return "Trend spadkowy";
-        }
-        else {
+        } else {
             return "Brak wyraźnego trendu";
         }
     }
 
     public String checkRSITrend() {
-        if (getIndicatorValue(rsi) > 70) {
-            return "Wskaźnik RSI wskazuje na wykupienie (trend spadkowy)";
-        } else if (getIndicatorValue(rsi) < 30) {
-            return "Wskaźnik RSI wskazuje na wyprzedanie (trend wzrostowy)";
+        if (Double.parseDouble(getIndicatorValue(rsi)) > 70) {
+            return "Trend spadkowy";
+        } else if (Double.parseDouble(getIndicatorValue(rsi)) < 30) {
+            return "Trend wzrostowy";
         } else {
-            return "Wskaźnik RSI wskazuje na neutralny trend";
+            return "Brak wyraźnego trendu";
         }
     }
 
+    public String checkMACDTrend() {
+        String[] partsMACD = getIndicatorValue(macd).split(", ");
+        String macdValue = partsMACD[0];
+        String macdSignal = partsMACD[1];
 
-    public double getIndicatorValue(By indicator) {
-        return Double.parseDouble(reusable.waitForVisibilityAndGetElementText(XTB_HOME_PAGE.getExpectedPageTitle(), indicator));
+        if (Double.parseDouble(macdValue) > Double.parseDouble(macdSignal)) {
+            return "Trend wzrostowy";
+        } else if (Double.parseDouble(macdValue) < Double.parseDouble(macdSignal)) {
+            return "Trend spadkowy";
+        } else {
+            return "Brak wyraźnego trendu";
+        }
+    }
+
+    public String checkBollingerBandsTrend() {
+        String[] partsBollingerBands = getIndicatorValue(bollingerBands).split(", ");
+        String bollingerBandsUpperBand = partsBollingerBands[0];
+        String bollingerBandsMiddleBand = partsBollingerBands[1];
+        String bollingerBandsLowerBand = partsBollingerBands[2];
+
+        if (Double.parseDouble(bollingerBandsMiddleBand) < Double.parseDouble(bollingerBandsLowerBand)) {
+            return "Trend spadkowy";
+        } else if (Double.parseDouble(bollingerBandsMiddleBand) > Double.parseDouble(bollingerBandsUpperBand)) {
+            return "Trend wzrostowy";
+        } else {
+            return "Brak wyraźnego trendu";
+        }
+    }
+
+    public String checkStochasticTrend() {
+        String[] partsStochastic = getIndicatorValue(stochastic).split(", ");
+        String stochasticMain = partsStochastic[0];
+        String stochasticSignal = partsStochastic[1];
+
+        if (Double.parseDouble(stochasticMain) > Double.parseDouble(stochasticSignal) && Double.parseDouble(stochasticMain) < 80) {
+            return "Trend wzrostowy";
+        } else if (Double.parseDouble(stochasticMain) < Double.parseDouble(stochasticSignal) && Double.parseDouble(stochasticMain) > 20) {
+            return "Trend spadkowy";
+        } else {
+            return "Brak wyraźnego trendu";
+        }
+    }
+
+    public String checkAdxTrend() {
+        String[] partsAdx = getIndicatorValue(adx).split(", ");
+        String adx = partsAdx[0];
+        String diPlus = partsAdx[1];
+        String diMinus = partsAdx[2];
+
+        if (Double.parseDouble(adx) > 25) {
+            if (Double.parseDouble(diPlus) > Double.parseDouble(diMinus)) {
+                return "Silny trend wzrostowy";
+            } else if (Double.parseDouble(diMinus) > Double.parseDouble(diPlus)) {
+                return "Silny trend spadkowy";
+            } else {
+                return "Silny trend, ale brak wyraźnego kierunku";
+            }
+        } else {
+            return "Słaby trend lub brak trendu";
+        }
+    }
+
+    public String getIndicatorValue(By indicator) {
+        return reusable.waitForVisibilityAndGetElementText(XTB_HOME_PAGE.getExpectedPageTitle(), indicator);
     }
 
     public boolean isPositionIsOpen() {
@@ -81,7 +143,7 @@ public class XtbHomePage {
 
     public void openSellPosition() {
         reusable.waitForPageTitle(XTB_HOME_PAGE.getExpectedPageTitle());
-        reusable.waitForVisibilityAndSendKeysToElement(XTB_HOME_PAGE.getExpectedPageTitle(), search, "LITECOIN");
+        reusable.waitForVisibilityAndSendKeysToElement(XTB_HOME_PAGE.getExpectedPageTitle(), search, "SOLANA");
         reusable.waitForVisibilityAndSendKeysToElement(XTB_HOME_PAGE.getExpectedPageTitle(), search, String.valueOf(Keys.ENTER));
 //        driver.findElement(search).sendKeys(Keys.ENTER);
         reusable.waitForVisibilityOfElementAndClick(XTB_HOME_PAGE.getExpectedPageTitle(), sellButton);
@@ -90,7 +152,7 @@ public class XtbHomePage {
 
     public void openBuyPosition() {
         reusable.waitForPageTitle(XTB_HOME_PAGE.getExpectedPageTitle());
-        reusable.waitForVisibilityAndSendKeysToElement(XTB_HOME_PAGE.getExpectedPageTitle(), search, "LITECOIN");
+        reusable.waitForVisibilityAndSendKeysToElement(XTB_HOME_PAGE.getExpectedPageTitle(), search, "SOLANA");
         reusable.waitForVisibilityAndSendKeysToElement(XTB_HOME_PAGE.getExpectedPageTitle(), search, String.valueOf(Keys.ENTER));
 //        driver.findElement(search).sendKeys(Keys.ENTER);
         reusable.waitForVisibilityOfElementAndClick(XTB_HOME_PAGE.getExpectedPageTitle(), buyButton);

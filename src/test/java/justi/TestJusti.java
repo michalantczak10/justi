@@ -33,6 +33,11 @@ public class TestJusti {
         xtbLoginPage.login();
         System.out.println("Trend dla EMA: " + xtbHomePage.checkEMATrend());
         System.out.println("Trend dla RSI: " + xtbHomePage.checkRSITrend());
+        System.out.println("Trend dla MACD: " + xtbHomePage.checkMACDTrend());
+        System.out.println("Trend dla Wstęg Bollingera: " + xtbHomePage.checkBollingerBandsTrend());
+        System.out.println("Trend dla Oscylatora Stochastycznego: " + xtbHomePage.checkStochasticTrend());
+        System.out.println("Trend dla ADX: " + xtbHomePage.checkAdxTrend());
+
 
 //        if (investingPage.getIndicatorsStateSummary().equals(-1)) {
 //            if (xtbHomePage.getOpenPositionType().equals(-1)) {

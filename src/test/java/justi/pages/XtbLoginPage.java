@@ -1,6 +1,5 @@
 package justi.pages;
 
-import justi.enums.ValidationMessages;
 import justi.reusable.Reusable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

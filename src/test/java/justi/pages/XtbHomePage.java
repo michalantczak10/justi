@@ -1,5 +1,6 @@
 package justi.pages;
 
+import justi.enums.Colors;
 import justi.reusable.Reusable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -35,21 +36,21 @@ public class XtbHomePage {
 
     public String checkEmaTrend() {
         if (Double.parseDouble(getIndicatorValue(ema5)) > Double.parseDouble(getIndicatorValue(ema20))) {
-            return GREEN + "Trend wzrostowy" + RESET;
+            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
         } else if (Double.parseDouble(getIndicatorValue(ema5)) < Double.parseDouble(getIndicatorValue(ema20))) {
-            return RED + "Trend spadkowy" + RESET;
+            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
         } else {
-            return "Brak wyraźnego trendu";
+            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
         }
     }
 
     public String checkRsiTrend() {
         if (Double.parseDouble(getIndicatorValue(rsi)) > 70) {
-            return "Trend spadkowy";
+            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
         } else if (Double.parseDouble(getIndicatorValue(rsi)) < 30) {
-            return "Trend wzrostowy";
+            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
         } else {
-            return "Brak wyraźnego trendu";
+            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
         }
     }
 

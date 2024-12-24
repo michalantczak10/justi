@@ -46,9 +46,9 @@ public class XtbHomePage {
 
     public String checkRsiTrend() {
         if (Double.parseDouble(getIndicatorValue(rsi)) > 70) {
-            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
-        } else if (Double.parseDouble(getIndicatorValue(rsi)) < 30) {
             return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
+        } else if (Double.parseDouble(getIndicatorValue(rsi)) < 30) {
+            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
         } else {
             return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
         }
@@ -60,11 +60,11 @@ public class XtbHomePage {
         String macdSignal = partsMACD[1];
 
         if (Double.parseDouble(macdValue) > Double.parseDouble(macdSignal)) {
-            return "Trend wzrostowy";
+            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
         } else if (Double.parseDouble(macdValue) < Double.parseDouble(macdSignal)) {
-            return "Trend spadkowy";
+            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
         } else {
-            return "Brak wyraźnego trendu";
+            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
         }
     }
 
@@ -75,11 +75,11 @@ public class XtbHomePage {
         String bollingerBandsLowerBand = partsBollingerBands[2];
 
         if (Double.parseDouble(bollingerBandsMiddleBand) < Double.parseDouble(bollingerBandsLowerBand)) {
-            return "Trend spadkowy";
+            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
         } else if (Double.parseDouble(bollingerBandsMiddleBand) > Double.parseDouble(bollingerBandsUpperBand)) {
-            return "Trend wzrostowy";
+            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
         } else {
-            return "Brak wyraźnego trendu";
+            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
         }
     }
 
@@ -89,11 +89,11 @@ public class XtbHomePage {
         String stochasticSignal = partsStochastic[1];
 
         if (Double.parseDouble(stochasticMain) > Double.parseDouble(stochasticSignal) && Double.parseDouble(stochasticMain) < 80) {
-            return "Trend wzrostowy";
+            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
         } else if (Double.parseDouble(stochasticMain) < Double.parseDouble(stochasticSignal) && Double.parseDouble(stochasticMain) > 20) {
-            return "Trend spadkowy";
+            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
         } else {
-            return "Brak wyraźnego trendu";
+            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
         }
     }
 

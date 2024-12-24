@@ -22,7 +22,7 @@ public class XtbHomePage {
     public By rsi = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'RSI [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By macd = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'MACD [12, 26, 9]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By bollingerBands = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'Bollinger [20, 2.5]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
-    public By stochastic = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SO [5, 3, 3]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By stochastic = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SO [9, 6, 3]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By adx = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'ADX [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By cci = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'CCI [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By williamsR = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), '%R [15]')]/following-sibling::span[@class='indicator-value-label ng-binding']");

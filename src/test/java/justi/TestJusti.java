@@ -13,6 +13,12 @@ public class TestJusti {
 
     WebDriver driver;
 
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+
     @Before
     public void setup() {
         WebDriverManager.edgedriver().setup();
@@ -30,13 +36,13 @@ public class TestJusti {
     }
 
     public void tradeStrategy(XtbLoginPage xtbLoginPage, XtbHomePage xtbHomePage) {
-        xtbLoginPage.login();
-        System.out.println("Trend dla EMA: " + xtbHomePage.checkEmaTrend());
-        System.out.println("Trend dla RSI: " + xtbHomePage.checkRsiTrend());
-        System.out.println("Trend dla MACD: " + xtbHomePage.checkMacdTrend());
-        System.out.println("Trend dla Wstęg Bollingera: " + xtbHomePage.checkBollingerBandsTrend());
-        System.out.println("Trend dla Oscylatora Stochastycznego: " + xtbHomePage.checkStochasticTrend());
-        System.out.println("Trend dla ADX: " + xtbHomePage.checkAdxTrend());
+        try {
+            xtbLoginPage.login();
+            printTrends(xtbHomePage);
+            // Dodaj tutaj logikę handlową
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 //        if (investingPage.getIndicatorsStateSummary().equals(-1)) {
@@ -113,8 +119,21 @@ public class TestJusti {
 //        }
     }
 
+    public void printTrends(XtbHomePage xtbHomePage) {
+        System.out.println("Trend dla EMA: " + xtbHomePage.checkEmaTrend());
+        System.out.println("Trend dla RSI: " + xtbHomePage.checkRsiTrend());
+        System.out.println("Trend dla MACD: " + xtbHomePage.checkMacdTrend());
+        System.out.println("Trend dla Wstęg Bollingera: " + xtbHomePage.checkBollingerBandsTrend());
+        System.out.println("Trend dla Oscylatora Stochastycznego: " + xtbHomePage.checkStochasticTrend());
+        System.out.println("Trend dla ADX: " + xtbHomePage.checkAdxTrend());
+        System.out.println("Trend dla CCI: " + xtbHomePage.checkCciTrend());
+        System.out.println("Trend dla Williams %R: " + xtbHomePage.checkWilliamsRTrend());
+    }
+
     @After
     public void quitDriver() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
+import static justi.TestJusti.*;
 import static justi.enums.ExpectedPageTitles.XTB_HOME_PAGE;
 
 public class XtbHomePage {
@@ -34,9 +35,9 @@ public class XtbHomePage {
 
     public String checkEmaTrend() {
         if (Double.parseDouble(getIndicatorValue(ema5)) > Double.parseDouble(getIndicatorValue(ema20))) {
-            return "Trend wzrostowy";
+            return GREEN + "Trend wzrostowy" + RESET;
         } else if (Double.parseDouble(getIndicatorValue(ema5)) < Double.parseDouble(getIndicatorValue(ema20))) {
-            return "Trend spadkowy";
+            return RED + "Trend spadkowy" + RESET;
         } else {
             return "Brak wyraźnego trendu";
         }

@@ -24,14 +24,15 @@ public class XtbHomePage {
     public By bollingerBands = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'Bollinger [20, 2.5]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By stochastic = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SO [5, 3, 3]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By adx = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'ADX [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
-
+    public By cci = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'CCI [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By williamsR = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), '%R [15]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
 
     public XtbHomePage(WebDriver driver) {
         this.driver = driver;
         this.reusable = new Reusable(driver);
     }
 
-    public String checkEMATrend() {
+    public String checkEmaTrend() {
         if (Double.parseDouble(getIndicatorValue(ema5)) > Double.parseDouble(getIndicatorValue(ema20))) {
             return "Trend wzrostowy";
         } else if (Double.parseDouble(getIndicatorValue(ema5)) < Double.parseDouble(getIndicatorValue(ema20))) {
@@ -41,7 +42,7 @@ public class XtbHomePage {
         }
     }
 
-    public String checkRSITrend() {
+    public String checkRsiTrend() {
         if (Double.parseDouble(getIndicatorValue(rsi)) > 70) {
             return "Trend spadkowy";
         } else if (Double.parseDouble(getIndicatorValue(rsi)) < 30) {
@@ -51,7 +52,7 @@ public class XtbHomePage {
         }
     }
 
-    public String checkMACDTrend() {
+    public String checkMacdTrend() {
         String[] partsMACD = getIndicatorValue(macd).split(", ");
         String macdValue = partsMACD[0];
         String macdSignal = partsMACD[1];
@@ -110,6 +111,26 @@ public class XtbHomePage {
             }
         } else {
             return "Słaby trend lub brak trendu";
+        }
+    }
+
+    public String checkCciTrend() {
+        if (Double.parseDouble(getIndicatorValue(cci)) > 100) {
+            return "Trend spadkowy";
+        } else if (Double.parseDouble(getIndicatorValue(cci)) < -100) {
+            return "Trend wzrostowy";
+        } else {
+            return "Brak wyraźnego trendu";
+        }
+    }
+
+    public String checkWilliamsRTrend() {
+        if (Double.parseDouble(getIndicatorValue(williamsR)) > -20) {
+            return "Trend spadkowy";
+        } else if (Double.parseDouble(getIndicatorValue(williamsR)) < -80) {
+            return "Trend wzrostowy";
+        } else {
+            return "Brak wyraźnego trendu";
         }
     }
 

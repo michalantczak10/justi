@@ -31,9 +31,9 @@ public class TestJusti {
 
     public void tradeStrategy(XtbLoginPage xtbLoginPage, XtbHomePage xtbHomePage) {
         xtbLoginPage.login();
-        System.out.println("Trend dla EMA: " + xtbHomePage.checkEMATrend());
-        System.out.println("Trend dla RSI: " + xtbHomePage.checkRSITrend());
-        System.out.println("Trend dla MACD: " + xtbHomePage.checkMACDTrend());
+        System.out.println("Trend dla EMA: " + xtbHomePage.checkEmaTrend());
+        System.out.println("Trend dla RSI: " + xtbHomePage.checkRsiTrend());
+        System.out.println("Trend dla MACD: " + xtbHomePage.checkMacdTrend());
         System.out.println("Trend dla Wstęg Bollingera: " + xtbHomePage.checkBollingerBandsTrend());
         System.out.println("Trend dla Oscylatora Stochastycznego: " + xtbHomePage.checkStochasticTrend());
         System.out.println("Trend dla ADX: " + xtbHomePage.checkAdxTrend());

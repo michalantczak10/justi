@@ -263,10 +263,79 @@ public class XtbHomePage {
         }
     }
 
-
     public String getIndicatorValue(By indicator) {
         return reusable.waitForVisibilityAndGetElementText(XTB_HOME_PAGE.getExpectedPageTitle(), indicator);
     }
+
+    public void printTrends() {
+        System.out.println("Wskaźniki techniczne:");
+        System.out.println("RSI(14): " + checkRsiTrend());
+        System.out.println("STOCH(9, 6, 3): " + checkStochasticTrend());
+        System.out.println("STOCHRSI(14): " + checkSrsiTrend());
+        System.out.println("MACD(12, 26, 9): " + checkMacdTrend());
+        System.out.println("ADX(14): " + checkAdxTrend());
+        System.out.println("Williams %R: " + checkWilliamsRTrend());
+        System.out.println("CCI(14): " + checkCciTrend());
+        System.out.println("ATR(14): " + checkAtrTrend());
+        System.out.println("Wstęgi Bollingera(20, 2.5): " + checkBollingerBandsTrend());
+        System.out.println("Acc: " + checkAccTrend());
+        System.out.println("BULLS(13): " + checkBullsTrend());
+        System.out.println("BEARS(13): " + checkBearsTrend());
+        System.out.println("Średnie kroczące:");
+        System.out.println("EMA5 vs EMA10: " + checkEma5VsEma10Trend());
+        System.out.println("EMA10 vs EMA20: " + checkEma10VsEma20Trend());
+        System.out.println("EM20 vs EMA50: " + checkEma20VsEma50Trend());
+        System.out.println("EM50 vs EMA100: " + checkEma50VsEma100Trend());
+        System.out.println("EM50 vs EMA100: " + checkEma100VsEma200Trend());
+    }
+
+    public String determineOverallTrend() {
+        int upwardTrendCount = 0;
+        int downwardTrendCount = 0;
+        int noClearTrendCount = 0;
+
+        // Przykładowe wywołania metod do analizy trendów
+        String[] trendResults = {
+                checkRsiTrend(),
+                checkStochasticTrend(),
+                checkSrsiTrend(),
+                checkMacdTrend(),
+                checkAdxTrend(),
+                checkWilliamsRTrend(),
+                checkCciTrend(),
+                checkAtrTrend(),
+                checkBollingerBandsTrend(),
+                checkAccTrend(),
+                checkBullsTrend(),
+                checkBearsTrend(),
+                checkEma5VsEma10Trend(),
+                checkEma10VsEma20Trend(),
+                checkEma20VsEma50Trend(),
+                checkEma50VsEma100Trend(),
+                checkEma100VsEma200Trend()
+        };
+
+        // Analiza wyników
+        for (String trend : trendResults) {
+            if (trend.contains(Messages.UPWARD_TREND.getMessage())) {
+                upwardTrendCount++;
+            } else if (trend.contains(Messages.DOWNWARD_TREND.getMessage())) {
+                downwardTrendCount++;
+            } else {
+                noClearTrendCount++;
+            }
+        }
+
+        // Wyznaczanie ostatecznego trendu
+        if (upwardTrendCount > downwardTrendCount && upwardTrendCount > noClearTrendCount) {
+            return Colors.GREEN.getColor() + "Ostateczny trend: Wzrostowy" + Colors.RESET.getColor();
+        } else if (downwardTrendCount > upwardTrendCount && downwardTrendCount > noClearTrendCount) {
+            return Colors.RED.getColor() + "Ostateczny trend: Spadkowy" + Colors.RESET.getColor();
+        } else {
+            return Colors.WHITE.getColor() + "Ostateczny trend: Brak wyraźnego trendu" + Colors.RESET.getColor();
+        }
+    }
+
 
     public boolean isPositionIsOpen() {
         reusable.waitForPageTitle(XTB_HOME_PAGE.getExpectedPageTitle());

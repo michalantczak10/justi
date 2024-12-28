@@ -35,8 +35,8 @@ public class TestJusti {
     public void tradeStrategy(XtbLoginPage xtbLoginPage, XtbHomePage xtbHomePage) {
         try {
             xtbLoginPage.login();
-            printTrends(xtbHomePage);
-            // Dodaj tutaj logikę handlową
+            xtbHomePage.printTrends();
+            xtbHomePage.determineOverallTrend();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,28 +114,6 @@ public class TestJusti {
 //                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
 //            }
 //        }
-    }
-
-    public void printTrends(XtbHomePage xtbHomePage) {
-        System.out.println("Wskaźniki techniczne:");
-        System.out.println("RSI(14): " + xtbHomePage.checkRsiTrend());
-        System.out.println("STOCH(9, 6, 3): " + xtbHomePage.checkStochasticTrend());
-        System.out.println("STOCHRSI(14): " + xtbHomePage.checkSrsiTrend());
-        System.out.println("MACD(12, 26, 9): " + xtbHomePage.checkMacdTrend());
-        System.out.println("ADX(14): " + xtbHomePage.checkAdxTrend());
-        System.out.println("Williams %R: " + xtbHomePage.checkWilliamsRTrend());
-        System.out.println("CCI(14): " + xtbHomePage.checkCciTrend());
-        System.out.println("ATR(14): " + xtbHomePage.checkAtrTrend());
-        System.out.println("Wstęgi Bollingera(20, 2.5): " + xtbHomePage.checkBollingerBandsTrend());
-        System.out.println("Acc: " + xtbHomePage.checkAccTrend());
-        System.out.println("BULLS(13): " + xtbHomePage.checkBullsTrend());
-        System.out.println("BEARS(13): " + xtbHomePage.checkBearsTrend());
-        System.out.println("Średnie kroczące:");
-        System.out.println("EMA5 vs EMA10: " + xtbHomePage.checkEma5VsEma10Trend());
-        System.out.println("EMA10 vs EMA20: " + xtbHomePage.checkEma10VsEma20Trend());
-        System.out.println("EM20 vs EMA50: " + xtbHomePage.checkEma20VsEma50Trend());
-        System.out.println("EM50 vs EMA100: " + xtbHomePage.checkEma50VsEma100Trend());
-
     }
 
     @After

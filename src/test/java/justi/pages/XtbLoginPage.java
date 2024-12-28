@@ -4,6 +4,7 @@ import justi.reusable.Reusable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static java.lang.Thread.sleep;
 import static justi.enums.ExpectedPageTitles.XTB_LOGIN_PAGE;
 
 public class XtbLoginPage {
@@ -19,7 +20,7 @@ public class XtbLoginPage {
         this.reusable = new Reusable(driver);
     }
 
-    public void login() {
+    public void login() throws InterruptedException {
         reusable.openWebsite("https://xstation5.xtb.com/#/demo/loggedIn", XTB_LOGIN_PAGE.getExpectedPageTitle());
         reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), login, "michalantczak@outlook.com");
         reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), password, "Michal$170188!");

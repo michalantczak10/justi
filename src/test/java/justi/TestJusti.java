@@ -8,6 +8,9 @@ import org.junit.Test;
 import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+
+import static java.lang.Thread.sleep;
 
 public class TestJusti {
 
@@ -15,10 +18,10 @@ public class TestJusti {
 
     @Before
     public void setup() {
+        EdgeOptions options = new EdgeOptions();
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
         driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
     }
 
     @Test
@@ -114,14 +117,23 @@ public class TestJusti {
     }
 
     public void printTrends(XtbHomePage xtbHomePage) {
+        System.out.println("Wskaźniki techniczne: ");
+        System.out.println("RSI(14): " + xtbHomePage.checkRsiTrend());
+        System.out.println("STOCH(9, 6): " + xtbHomePage.checkStochasticTrend());
+        System.out.println("STOCHRSI(14): " + xtbHomePage.checkSrsiTrend());
+        System.out.println("MACD(12, 26): " + xtbHomePage.checkMacdTrend());
+        System.out.println("ADX(14): " + xtbHomePage.checkAdxTrend());
+        System.out.println("Williams %R: " + xtbHomePage.checkWilliamsRTrend());
+        System.out.println("CCI(14): " + xtbHomePage.checkCciTrend());
+        System.out.println("ATR(14): " + xtbHomePage.checkAtrTrend());
+        System.out.println("Wstęgi Bollingera(20, 2.5): " + xtbHomePage.checkBollingerBandsTrend());
+        System.out.println("Acc: " + xtbHomePage.checkAccTrend());
+
+        System.out.println("BULLS(13): " + xtbHomePage.checkBullsTrend());
+        System.out.println("Średnie kroczące: ");
         System.out.println("Trend dla EMA: " + xtbHomePage.checkEmaTrend());
-        System.out.println("Trend dla RSI: " + xtbHomePage.checkRsiTrend());
-        System.out.println("Trend dla MACD: " + xtbHomePage.checkMacdTrend());
-        System.out.println("Trend dla Wstęg Bollingera: " + xtbHomePage.checkBollingerBandsTrend());
-        System.out.println("Trend dla Oscylatora Stochastycznego: " + xtbHomePage.checkStochasticTrend());
-        System.out.println("Trend dla ADX: " + xtbHomePage.checkAdxTrend());
-        System.out.println("Trend dla CCI: " + xtbHomePage.checkCciTrend());
-        System.out.println("Trend dla Williams %R: " + xtbHomePage.checkWilliamsRTrend());
+
+
     }
 
     @After

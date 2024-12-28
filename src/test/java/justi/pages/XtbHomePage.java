@@ -1,12 +1,12 @@
 package justi.pages;
 
 import justi.enums.Colors;
+import justi.enums.Messages;
 import justi.reusable.Reusable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-import static justi.TestJusti.*;
 import static justi.enums.ExpectedPageTitles.XTB_HOME_PAGE;
 
 public class XtbHomePage {
@@ -28,6 +28,11 @@ public class XtbHomePage {
     public By adx = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'ADX [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By cci = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'CCI [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By williamsR = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), '%R [15]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By srsi = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SRSI [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By atr = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'ATR [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By bullsPower = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'Bulls [13]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By acc = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'Acc')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+
 
     public XtbHomePage(WebDriver driver) {
         this.driver = driver;
@@ -35,106 +40,160 @@ public class XtbHomePage {
     }
 
     public String checkEmaTrend() {
-        if (Double.parseDouble(getIndicatorValue(ema5)) > Double.parseDouble(getIndicatorValue(ema20))) {
-            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
-        } else if (Double.parseDouble(getIndicatorValue(ema5)) < Double.parseDouble(getIndicatorValue(ema20))) {
-            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
+        double ema5Value = Double.parseDouble(getIndicatorValue(ema5));
+        double ema20Value = Double.parseDouble(getIndicatorValue(ema20));
+
+        if (ema5Value > ema20Value) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + ema20Value;
+        } else if (ema5Value < ema20Value) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + ema20Value;
         } else {
-            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + ema20Value;
         }
     }
 
     public String checkRsiTrend() {
-        if (Double.parseDouble(getIndicatorValue(rsi)) > 70) {
-            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
-        } else if (Double.parseDouble(getIndicatorValue(rsi)) < 30) {
-            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
+        double rsiValue = Double.parseDouble(getIndicatorValue(rsi));
+
+        if (rsiValue > 70) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + rsiValue;
+        } else if (rsiValue < 30) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + rsiValue;
         } else {
-            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + rsiValue;
         }
     }
 
     public String checkMacdTrend() {
-        String[] partsMACD = getIndicatorValue(macd).split(", ");
-        String macdValue = partsMACD[0];
-        String macdSignal = partsMACD[1];
+        String[] macdComponents = getIndicatorValue(macd).split(", ");
+        double macdValue = Double.parseDouble(macdComponents[0]);
+        double signalValue = Double.parseDouble(macdComponents[1]);
 
-        if (Double.parseDouble(macdValue) > Double.parseDouble(macdSignal)) {
-            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
-        } else if (Double.parseDouble(macdValue) < Double.parseDouble(macdSignal)) {
-            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
+        if (macdValue > signalValue) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + macdValue + " " +  signalValue;
+        } else if (macdValue < signalValue) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + macdValue + " " + signalValue;
         } else {
-            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + macdValue + " " + signalValue;
         }
     }
 
     public String checkBollingerBandsTrend() {
-        String[] partsBollingerBands = getIndicatorValue(bollingerBands).split(", ");
-        String bollingerBandsUpperBand = partsBollingerBands[0];
-        String bollingerBandsMiddleBand = partsBollingerBands[1];
-        String bollingerBandsLowerBand = partsBollingerBands[2];
+        String[] bollingerBandsComponents = getIndicatorValue(bollingerBands).split(", ");
+        double upperBandValue = Double.parseDouble(bollingerBandsComponents[0]);
+        double middleBandValue = Double.parseDouble(bollingerBandsComponents[1]);
+        double lowerBandValue = Double.parseDouble(bollingerBandsComponents[2]);
 
-        if (Double.parseDouble(bollingerBandsMiddleBand) < Double.parseDouble(bollingerBandsLowerBand)) {
-            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
-        } else if (Double.parseDouble(bollingerBandsMiddleBand) > Double.parseDouble(bollingerBandsUpperBand)) {
-            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
+        if (middleBandValue < lowerBandValue) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + middleBandValue + " " +  lowerBandValue;
+        } else if (middleBandValue > upperBandValue) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + middleBandValue + " " +  upperBandValue;
         } else {
-            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + middleBandValue + " " +  upperBandValue + " " + lowerBandValue;
         }
     }
 
     public String checkStochasticTrend() {
-        String[] partsStochastic = getIndicatorValue(stochastic).split(", ");
-        String stochasticMain = partsStochastic[0];
-        String stochasticSignal = partsStochastic[1];
+        String[] stochasticComponents = getIndicatorValue(stochastic).split(", ");
+        double stochasticMainValue = Double.parseDouble(stochasticComponents[0]);
+        double stochasticSignalValue = Double.parseDouble(stochasticComponents[1]);
 
-        if (Double.parseDouble(stochasticMain) > Double.parseDouble(stochasticSignal) && Double.parseDouble(stochasticMain) < 80) {
-            return Colors.GREEN.getColor() + "Trend wzrostowy" + Colors.RESET.getColor();
-        } else if (Double.parseDouble(stochasticMain) < Double.parseDouble(stochasticSignal) && Double.parseDouble(stochasticMain) > 20) {
-            return Colors.RED.getColor() + "Trend spadkowy" + Colors.RESET.getColor();
+        if (stochasticMainValue > stochasticSignalValue && stochasticMainValue < 80) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + stochasticMainValue + " " +  stochasticSignalValue;
+        } else if (stochasticMainValue < stochasticSignalValue && stochasticMainValue > 20) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + stochasticMainValue + " " +  stochasticSignalValue;
         } else {
-            return Colors.WHITE.getColor() + "Brak wyraźnego trendu" + Colors.RESET.getColor();
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + stochasticMainValue + " " +  stochasticSignalValue;
         }
     }
 
     public String checkAdxTrend() {
-        String[] partsAdx = getIndicatorValue(adx).split(", ");
-        String adx = partsAdx[0];
-        String diPlus = partsAdx[1];
-        String diMinus = partsAdx[2];
+        String[] adxComponents = getIndicatorValue(adx).split(", ");
+        double adxValue = Double.parseDouble(adxComponents[0]);
+        double diPlusValue = Double.parseDouble(adxComponents[1]);
+        double diMinusValue = Double.parseDouble(adxComponents[2]);
 
-        if (Double.parseDouble(adx) > 25) {
-            if (Double.parseDouble(diPlus) > Double.parseDouble(diMinus)) {
-                return "Silny trend wzrostowy";
-            } else if (Double.parseDouble(diMinus) > Double.parseDouble(diPlus)) {
-                return "Silny trend spadkowy";
-            } else {
-                return "Silny trend, ale brak wyraźnego kierunku";
-            }
+        if (diPlusValue > diMinusValue && adxValue > 25) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + diPlusValue + " " +  diMinusValue + " " + adxValue;
+        } else if (diMinusValue > diPlusValue && adxValue > 25) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + diPlusValue + " " +  diMinusValue + " " + adxValue;
         } else {
-            return "Słaby trend lub brak trendu";
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + diPlusValue + " " +  diMinusValue + " " + adxValue;
         }
     }
 
     public String checkCciTrend() {
-        if (Double.parseDouble(getIndicatorValue(cci)) > 100) {
-            return "Trend spadkowy";
-        } else if (Double.parseDouble(getIndicatorValue(cci)) < -100) {
-            return "Trend wzrostowy";
+        double cciValue = Double.parseDouble(getIndicatorValue(cci));
+
+        if (cciValue > 100) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + cciValue;
+        } else if (cciValue < -100) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + cciValue;
         } else {
-            return "Brak wyraźnego trendu";
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + cciValue;
         }
     }
 
     public String checkWilliamsRTrend() {
-        if (Double.parseDouble(getIndicatorValue(williamsR)) > -20) {
-            return "Trend spadkowy";
-        } else if (Double.parseDouble(getIndicatorValue(williamsR)) < -80) {
-            return "Trend wzrostowy";
+        double williamsRValue = Double.parseDouble(getIndicatorValue(williamsR));
+
+        if (williamsRValue > -20) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + williamsRValue;
+        } else if (williamsRValue < -80) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + williamsRValue;
         } else {
-            return "Brak wyraźnego trendu";
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + williamsRValue;
         }
     }
+
+    public String checkSrsiTrend() {
+        double srsiValue = Double.parseDouble(getIndicatorValue(srsi));
+
+        if (srsiValue > 80) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + srsiValue;
+        } else if (srsiValue < 20) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + srsiValue;
+        } else {
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + srsiValue;
+        }
+    }
+
+    public String checkAtrTrend() {
+        double atrValue = Double.parseDouble(getIndicatorValue(atr));
+
+        if (atrValue > 1.5) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + atrValue;
+        } else if (atrValue < 1.0) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + atrValue;
+        } else {
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + atrValue;
+        }
+    }
+
+    public String checkBullsTrend() {
+        double bullsPowerValue = Double.parseDouble(getIndicatorValue(bullsPower));
+
+        if (bullsPowerValue > 0) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + bullsPowerValue;
+        } else if (bullsPowerValue < 0) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + bullsPowerValue;
+        } else {
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + bullsPowerValue;
+        }
+    }
+
+    public String checkAccTrend() {
+        double accValue = Double.parseDouble(getIndicatorValue(acc));
+
+        if (accValue > 0) {
+            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + accValue;
+        } else if (accValue < 0) {
+            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor() + " " + accValue;
+        } else {
+            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor() + " " + accValue;
+        }
+    }
+
 
     public String getIndicatorValue(By indicator) {
         return reusable.waitForVisibilityAndGetElementText(XTB_HOME_PAGE.getExpectedPageTitle(), indicator);

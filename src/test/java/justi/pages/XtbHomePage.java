@@ -19,11 +19,9 @@ public class XtbHomePage {
     By applyButton = By.cssSelector("button[class='applyBtn']");
     By openPosition = By.cssSelector("/html/body/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div[5]/div/div/div/div[2]/div[1]/div");
     By positionType = By.xpath("/html/body/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div[5]/div/div/div/div[2]/div[2]");
-    public By ema5 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [5, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
-    public By ema10 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [10, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
-    public By ema20 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [20, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
-    public By ema50 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [50, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
-    public By ema100 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [100, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By sma50 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SMA [50, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By sma200 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SMA [200, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    public By ema50 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [5, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By ema200 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [200, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By rsi = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'RSI [14]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By macd = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'MACD [12, 26, 9]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
@@ -44,65 +42,26 @@ public class XtbHomePage {
         this.reusable = new Reusable(driver);
     }
 
-    public String checkEma5VsEma10Trend() {
-        double ema5Value = Double.parseDouble(getIndicatorValue(ema5));
-        double ema10Value = Double.parseDouble(getIndicatorValue(ema10));
+    public String checkSma50VsSma200Trend() {
+        double sma50Value = Double.parseDouble(getIndicatorValue(sma50));
+        double sma200Value = Double.parseDouble(getIndicatorValue(sma200));
 
-        if (ema5Value > ema10Value) {
+        if (sma50Value > sma200Value) {
             return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else if (ema5Value < ema10Value) {
+        } else if (sma50Value < sma200Value) {
             return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor();
         } else {
             return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor();
         }
     }
 
-    public String checkEma10VsEma20Trend() {
-        double ema10Value = Double.parseDouble(getIndicatorValue(ema10));
-        double ema20Value = Double.parseDouble(getIndicatorValue(ema20));
-
-        if (ema10Value > ema20Value) {
-            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else if (ema10Value < ema20Value) {
-            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else {
-            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor();
-        }
-    }
-
-    public String checkEma20VsEma50Trend() {
-        double ema20Value = Double.parseDouble(getIndicatorValue(ema20));
+    public String checkEma50VsEma200Trend() {
         double ema50Value = Double.parseDouble(getIndicatorValue(ema50));
-
-        if (ema20Value > ema50Value) {
-            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else if (ema20Value < ema50Value) {
-            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else {
-            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor();
-        }
-    }
-
-    public String checkEma50VsEma100Trend() {
-        double ema50Value = Double.parseDouble(getIndicatorValue(ema50));
-        double ema100Value = Double.parseDouble(getIndicatorValue(ema100));
-
-        if (ema50Value > ema100Value) {
-            return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else if (ema50Value < ema100Value) {
-            return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else {
-            return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor();
-        }
-    }
-
-    public String checkEma100VsEma200Trend() {
-        double ema100Value = Double.parseDouble(getIndicatorValue(ema100));
         double ema200Value = Double.parseDouble(getIndicatorValue(ema200));
 
-        if (ema100Value > ema200Value) {
+        if (ema50Value > ema200Value) {
             return Colors.GREEN.getColor() + Messages.UPWARD_TREND.getMessage() + Colors.RESET.getColor();
-        } else if (ema100Value < ema200Value) {
+        } else if (ema50Value < ema200Value) {
             return Colors.RED.getColor() + Messages.DOWNWARD_TREND.getMessage() + Colors.RESET.getColor();
         } else {
             return Colors.WHITE.getColor() + Messages.NO_CLEAR_TREND.getMessage() + Colors.RESET.getColor();
@@ -282,37 +241,35 @@ public class XtbHomePage {
         System.out.println("BULLS(13): " + checkBullsTrend());
         System.out.println("BEARS(13): " + checkBearsTrend());
         System.out.println("Średnie kroczące:");
-        System.out.println("EMA5 vs EMA10: " + checkEma5VsEma10Trend());
+//        System.out.println("SMA5 vs SMA10: " + checkSma5VsSma10Trend());
+//        System.out.println("SMA10 vs SMA20: " + checkSma10VsSma20Trend());
+//        System.out.println("SMA20 vs SMA50: " + checkSma20VsSma50Trend());
+//        System.out.println("SMA50 vs SMA100: " + checkSma50VsSma100Trend());
+//        System.out.println("SMA100 vs SMA200: " + checkSma100VsSma200Trend());
+        System.out.println("EMA5 vs EMA10: " + checkEma50VsEma200Trend());
         System.out.println("EMA10 vs EMA20: " + checkEma10VsEma20Trend());
-        System.out.println("EM20 vs EMA50: " + checkEma20VsEma50Trend());
-        System.out.println("EM50 vs EMA100: " + checkEma50VsEma100Trend());
-        System.out.println("EM50 vs EMA100: " + checkEma100VsEma200Trend());
+        System.out.println("EMA20 vs EMA50: " + checkEma20VsEma50Trend());
+        System.out.println("EMA50 vs EMA100: " + checkEma50VsEma100Trend());
+        System.out.println("EMA100 vs EMA200: " + checkEma100VsEma200Trend());
     }
 
-    public String determineOverallTrend() {
+    public void determineOverallTrend() {
         int upwardTrendCount = 0;
         int downwardTrendCount = 0;
         int noClearTrendCount = 0;
+        int allIndicatorsCount = 22;
 
-        // Przykładowe wywołania metod do analizy trendów
         String[] trendResults = {
                 checkRsiTrend(),
                 checkStochasticTrend(),
-                checkSrsiTrend(),
                 checkMacdTrend(),
                 checkAdxTrend(),
                 checkWilliamsRTrend(),
                 checkCciTrend(),
                 checkAtrTrend(),
-                checkBollingerBandsTrend(),
                 checkAccTrend(),
-                checkBullsTrend(),
-                checkBearsTrend(),
-                checkEma5VsEma10Trend(),
-                checkEma10VsEma20Trend(),
-                checkEma20VsEma50Trend(),
-                checkEma50VsEma100Trend(),
-                checkEma100VsEma200Trend()
+                checkSma50VsSma200Trend(),
+                checkEma50VsEma200Trend()
         };
 
         // Analiza wyników
@@ -326,16 +283,14 @@ public class XtbHomePage {
             }
         }
 
-        // Wyznaczanie ostatecznego trendu
         if (upwardTrendCount > downwardTrendCount && upwardTrendCount > noClearTrendCount) {
-            return Colors.GREEN.getColor() + "Ostateczny trend: Wzrostowy" + Colors.RESET.getColor();
+            System.out.println("Liczba wskaźników dla trendu wzrostowego: " + upwardTrendCount + "/" + allIndicatorsCount + " " + Colors.GREEN.getColor() + "Ostateczny trend: wzrostowy" + Colors.RESET.getColor());
         } else if (downwardTrendCount > upwardTrendCount && downwardTrendCount > noClearTrendCount) {
-            return Colors.RED.getColor() + "Ostateczny trend: Spadkowy" + Colors.RESET.getColor();
+            System.out.println("Liczba wskaźników dla trendu spadkowego: " + downwardTrendCount + "/" + allIndicatorsCount + " " + Colors.RED.getColor() + "Ostateczny trend: spadkowy" + Colors.RESET.getColor());
         } else {
-            return Colors.WHITE.getColor() + "Ostateczny trend: Brak wyraźnego trendu" + Colors.RESET.getColor();
+            System.out.println("Liczba wskaźników dla braku wyraźnego trendu: " + noClearTrendCount + "/" + allIndicatorsCount + " " + Colors.WHITE.getColor() + "Ostateczny trend: Brak wyraźnego trendu" + Colors.RESET.getColor());
         }
     }
-
 
     public boolean isPositionIsOpen() {
         reusable.waitForPageTitle(XTB_HOME_PAGE.getExpectedPageTitle());

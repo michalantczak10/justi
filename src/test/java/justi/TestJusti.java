@@ -18,7 +18,6 @@ public class TestJusti {
 
     @Before
     public void setup() {
-        EdgeOptions options = new EdgeOptions();
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
         driver.manage().window().maximize();

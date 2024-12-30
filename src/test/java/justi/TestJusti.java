@@ -29,83 +29,83 @@ public class TestJusti {
     }
 
     public void tradeStrategy(XtbLoginPage xtbLoginPage, XtbHomePage xtbHomePage) {
-            xtbLoginPage.login();
-            xtbHomePage.printTrends();
-            xtbHomePage.determineOverallTrend();
+        xtbLoginPage.login();
+        xtbHomePage.printTrends();
+        xtbHomePage.determineOverallTrend();
 
 
-//        if (investingPage.getIndicatorsStateSummary().equals(-1)) {
-//            if (xtbHomePage.getOpenPositionType().equals(-1)) {
-//                System.out.println("Wskaźniki wskazały trend spadkowy ...");
-//                System.out.println("Pozycja sprzedaży była do tej pory otwarta ...");
-//                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
-//                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(0)) {
-//            if (xtbHomePage.getOpenPositionType().equals(-1)) {
-////                xtbHomePage.closePosition();
-//                System.out.println("Wskaźniki wskazały brak trendu ...");
-//                System.out.println("Pozycja sprzedaży była do tej pory otwarta ...");
-//                System.out.println("Pozycja sprzedaży została teraz zamknięta ...");
-//                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
-//            if (xtbHomePage.getOpenPositionType().equals(-1)) {
-////                xtbHomePage.closePosition();
-////                xtbHomePage.openBuyPosition();
-//                System.out.println("Wskaźniki wskazały trend wzrostowy ...");
-//                System.out.println("Pozycja sprzedaży była do tej pory otwarta ...");
-//                System.out.println("Pozycja sprzedaży została teraz zamknięta ...");
-//                System.out.println("Pozycja kupna została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(-1)) {
-//            if (xtbHomePage.getOpenPositionType().equals(0)) {
-////                xtbHomePage.openSellPosition();
-//                System.out.println("Wskaźniki wskazały trend spadkowy ...");
-//                System.out.println("Żadna pozycja nie była do tej pory otwarta ...");
-//                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
-//                System.out.println("Pozycja sprzedaży została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(0)) {
-//            if (xtbHomePage.getOpenPositionType().equals(0)) {
-//                System.out.println("Wskaźniki wskazały brak trendu ...");
-//                System.out.println("Żadna pozycja nie była do tej pory otwarta ...");
-//                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
-//                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
-//            if (xtbHomePage.getOpenPositionType().equals(0)) {
-////                xtbHomePage.openBuyPosition();
-//                System.out.println("Wskaźniki wskazały trend wzrostowy ...");
-//                System.out.println("Żadna pozycja nie była do tej pory otwarta ...");
-//                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
-//                System.out.println("Pozycja kupna została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(-1)) {
-//            if (xtbHomePage.getOpenPositionType().equals(1)) {
-////                xtbHomePage.closePosition();
-////                xtbHomePage.openSellPosition();
-//                System.out.println("Wskaźniki wskazały trend spadkowy ...");
-//                System.out.println("Pozycja kupna była do tej pory otwarta ...");
-//                System.out.println("Pozycja kupna została teraz zamknięta ...");
-//                System.out.println("Pozycja sprzedaży została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(0)) {
-//            if (xtbHomePage.getOpenPositionType().equals(1)) {
-////                xtbHomePage.closePosition();
-//                System.out.println("Wskaźniki wskazały brak trendu ...");
-//                System.out.println("Pozycja kupna była do tej pory otwarta ...");
-//                System.out.println("Pozycja kupna została teraz zamknięta ...");
-//                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
-//            }
-//        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
-//            if (xtbHomePage.getOpenPositionType().equals(1)) {
-//                System.out.println("Wskaźniki wskazały trend wzrostowy ...");
-//                System.out.println("Pozycja kupna była do tej pory otwarta ...");
-//                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
-//                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
-//            }
-//        }
+        if (xtbHomePage.determineOverallTrend() == (-1)) {
+            if (xtbHomePage.getOpenPositionType().equals(-1)) {
+                System.out.println("Wskaźniki wskazały trend spadkowy ...");
+                System.out.println("Pozycja sprzedaży była do tej pory otwarta ...");
+                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
+                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
+            }
+        } else if (xtbHomePage.determineOverallTrend() == 0) {
+            if (xtbHomePage.getOpenPositionType().equals(-1)) {
+//                xtbHomePage.closePosition();
+                System.out.println("Wskaźniki wskazały brak trendu ...");
+                System.out.println("Pozycja sprzedaży była do tej pory otwarta ...");
+                System.out.println("Pozycja sprzedaży została teraz zamknięta ...");
+                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
+            }
+        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
+            if (xtbHomePage.getOpenPositionType().equals(-1)) {
+//                xtbHomePage.closePosition();
+//                xtbHomePage.openBuyPosition();
+                System.out.println("Wskaźniki wskazały trend wzrostowy ...");
+                System.out.println("Pozycja sprzedaży była do tej pory otwarta ...");
+                System.out.println("Pozycja sprzedaży została teraz zamknięta ...");
+                System.out.println("Pozycja kupna została teraz otwarta ...\n");
+            }
+        } else if (investingPage.getIndicatorsStateSummary().equals(-1)) {
+            if (xtbHomePage.getOpenPositionType().equals(0)) {
+//                xtbHomePage.openSellPosition();
+                System.out.println("Wskaźniki wskazały trend spadkowy ...");
+                System.out.println("Żadna pozycja nie była do tej pory otwarta ...");
+                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
+                System.out.println("Pozycja sprzedaży została teraz otwarta ...\n");
+            }
+        } else if (investingPage.getIndicatorsStateSummary().equals(0)) {
+            if (xtbHomePage.getOpenPositionType().equals(0)) {
+                System.out.println("Wskaźniki wskazały brak trendu ...");
+                System.out.println("Żadna pozycja nie była do tej pory otwarta ...");
+                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
+                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
+            }
+        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
+            if (xtbHomePage.getOpenPositionType().equals(0)) {
+//                xtbHomePage.openBuyPosition();
+                System.out.println("Wskaźniki wskazały trend wzrostowy ...");
+                System.out.println("Żadna pozycja nie była do tej pory otwarta ...");
+                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
+                System.out.println("Pozycja kupna została teraz otwarta ...\n");
+            }
+        } else if (investingPage.getIndicatorsStateSummary().equals(-1)) {
+            if (xtbHomePage.getOpenPositionType().equals(1)) {
+//                xtbHomePage.closePosition();
+//                xtbHomePage.openSellPosition();
+                System.out.println("Wskaźniki wskazały trend spadkowy ...");
+                System.out.println("Pozycja kupna była do tej pory otwarta ...");
+                System.out.println("Pozycja kupna została teraz zamknięta ...");
+                System.out.println("Pozycja sprzedaży została teraz otwarta ...\n");
+            }
+        } else if (investingPage.getIndicatorsStateSummary().equals(0)) {
+            if (xtbHomePage.getOpenPositionType().equals(1)) {
+//                xtbHomePage.closePosition();
+                System.out.println("Wskaźniki wskazały brak trendu ...");
+                System.out.println("Pozycja kupna była do tej pory otwarta ...");
+                System.out.println("Pozycja kupna została teraz zamknięta ...");
+                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
+            }
+        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
+            if (xtbHomePage.getOpenPositionType().equals(1)) {
+                System.out.println("Wskaźniki wskazały trend wzrostowy ...");
+                System.out.println("Pozycja kupna była do tej pory otwarta ...");
+                System.out.println("Żadna pozycja nie została teraz zamknięta ...");
+                System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
+            }
+        }
     }
 
     @After

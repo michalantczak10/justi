@@ -20,7 +20,7 @@ public class XtbLoginPage {
         this.reusable = new Reusable(driver);
     }
 
-    public void login() throws InterruptedException {
+    public void login() {
         reusable.openWebsite("https://xstation5.xtb.com/#/demo/loggedIn", XTB_LOGIN_PAGE.getExpectedPageTitle());
         reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), login, "michalantczak@outlook.com");
         reusable.waitForVisibilityAndSendKeysToElement(XTB_LOGIN_PAGE.getExpectedPageTitle(), password, "Michal$170188!");

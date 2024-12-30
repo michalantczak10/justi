@@ -8,9 +8,6 @@ import org.junit.Test;
 import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-
-import static java.lang.Thread.sleep;
 
 public class TestJusti {
 
@@ -32,13 +29,9 @@ public class TestJusti {
     }
 
     public void tradeStrategy(XtbLoginPage xtbLoginPage, XtbHomePage xtbHomePage) {
-        try {
             xtbLoginPage.login();
             xtbHomePage.printTrends();
             xtbHomePage.determineOverallTrend();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
 //        if (investingPage.getIndicatorsStateSummary().equals(-1)) {

@@ -1,5 +1,6 @@
 package justi;
 
+import justi.enums.Colors;
 import justi.pages.XtbHomePage;
 import justi.pages.XtbLoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -34,7 +35,7 @@ public class TestJusti {
         xtbHomePage.determineOverallTrend();
 
 
-        if (xtbHomePage.determineOverallTrend() == (-1)) {
+        if (xtbHomePage.determineOverallTrend() == -1) {
             if (xtbHomePage.getOpenPositionType().equals(-1)) {
                 System.out.println("Wskaźniki wskazały trend spadkowy ...");
                 System.out.println("Pozycja sprzedaży była do tej pory otwarta ...");
@@ -49,7 +50,7 @@ public class TestJusti {
                 System.out.println("Pozycja sprzedaży została teraz zamknięta ...");
                 System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
             }
-        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
+        } else if (xtbHomePage.determineOverallTrend() == 1) {
             if (xtbHomePage.getOpenPositionType().equals(-1)) {
 //                xtbHomePage.closePosition();
 //                xtbHomePage.openBuyPosition();
@@ -58,7 +59,7 @@ public class TestJusti {
                 System.out.println("Pozycja sprzedaży została teraz zamknięta ...");
                 System.out.println("Pozycja kupna została teraz otwarta ...\n");
             }
-        } else if (investingPage.getIndicatorsStateSummary().equals(-1)) {
+        } else if (xtbHomePage.determineOverallTrend() == -1) {
             if (xtbHomePage.getOpenPositionType().equals(0)) {
 //                xtbHomePage.openSellPosition();
                 System.out.println("Wskaźniki wskazały trend spadkowy ...");
@@ -66,14 +67,14 @@ public class TestJusti {
                 System.out.println("Żadna pozycja nie została teraz zamknięta ...");
                 System.out.println("Pozycja sprzedaży została teraz otwarta ...\n");
             }
-        } else if (investingPage.getIndicatorsStateSummary().equals(0)) {
+        } else if (xtbHomePage.determineOverallTrend() == 0) {
             if (xtbHomePage.getOpenPositionType().equals(0)) {
                 System.out.println("Wskaźniki wskazały brak trendu ...");
                 System.out.println("Żadna pozycja nie była do tej pory otwarta ...");
                 System.out.println("Żadna pozycja nie została teraz zamknięta ...");
                 System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
             }
-        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
+        } else if (xtbHomePage.determineOverallTrend() == 1) {
             if (xtbHomePage.getOpenPositionType().equals(0)) {
 //                xtbHomePage.openBuyPosition();
                 System.out.println("Wskaźniki wskazały trend wzrostowy ...");
@@ -81,7 +82,7 @@ public class TestJusti {
                 System.out.println("Żadna pozycja nie została teraz zamknięta ...");
                 System.out.println("Pozycja kupna została teraz otwarta ...\n");
             }
-        } else if (investingPage.getIndicatorsStateSummary().equals(-1)) {
+        } else if (xtbHomePage.determineOverallTrend() == -1) {
             if (xtbHomePage.getOpenPositionType().equals(1)) {
 //                xtbHomePage.closePosition();
 //                xtbHomePage.openSellPosition();
@@ -90,7 +91,7 @@ public class TestJusti {
                 System.out.println("Pozycja kupna została teraz zamknięta ...");
                 System.out.println("Pozycja sprzedaży została teraz otwarta ...\n");
             }
-        } else if (investingPage.getIndicatorsStateSummary().equals(0)) {
+        } else if (xtbHomePage.determineOverallTrend() == 0) {
             if (xtbHomePage.getOpenPositionType().equals(1)) {
 //                xtbHomePage.closePosition();
                 System.out.println("Wskaźniki wskazały brak trendu ...");
@@ -98,7 +99,7 @@ public class TestJusti {
                 System.out.println("Pozycja kupna została teraz zamknięta ...");
                 System.out.println("Żadna pozycja nie została teraz otwarta ...\n");
             }
-        } else if (investingPage.getIndicatorsStateSummary().equals(1)) {
+        } else if (xtbHomePage.determineOverallTrend() == 1) {
             if (xtbHomePage.getOpenPositionType().equals(1)) {
                 System.out.println("Wskaźniki wskazały trend wzrostowy ...");
                 System.out.println("Pozycja kupna była do tej pory otwarta ...");

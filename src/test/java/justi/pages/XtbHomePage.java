@@ -19,7 +19,7 @@ public class XtbHomePage {
     By applyButton = By.cssSelector("button[class='applyBtn']");
     By openPosition = By.cssSelector("/html/body/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div[5]/div/div/div/div[2]/div[1]/div");
     By positionType = By.xpath("/html/body/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div[5]/div/div/div/div[2]/div[2]");
-//    public By sma50 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SMA [50, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
+    //    public By sma50 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SMA [50, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
 //    public By sma200 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'SMA [200, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By ema50 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [50, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
     public By ema200 = By.xpath("//div[contains(@class, 'indicator-label-container')]//span[contains(text(), 'EMA [200, 0]')]/following-sibling::span[@class='indicator-value-label ng-binding']");
@@ -238,7 +238,7 @@ public class XtbHomePage {
         System.out.println("EMA50 vs EMA200: " + checkEma50VsEma200Trend());
     }
 
-    public int determineOverallTrend() {
+    public void determineOverallTrend() {
         int upwardTrendCount = 0;
         int downwardTrendCount = 0;
         int noClearTrendCount = 0;
@@ -269,17 +269,17 @@ public class XtbHomePage {
         }
 
         if (upwardTrendCount > downwardTrendCount && upwardTrendCount > noClearTrendCount) {
-//            System.out.println("Liczba wskaźników dla trendu wzrostowego: " + upwardTrendCount + "/" + allIndicatorsCount + " " + Colors.GREEN.getColor() + "Ostateczny trend: wzrostowy" + Colors.RESET.getColor());
-        summary = 1;
+            System.out.println("Liczba wskaźników dla trendu wzrostowego: " + upwardTrendCount + "/" + allIndicatorsCount + " " + Colors.GREEN.getColor() + "Ostateczny trend: wzrostowy" + Colors.RESET.getColor());
+            summary = 1;
         } else if (downwardTrendCount > upwardTrendCount && downwardTrendCount > noClearTrendCount) {
             System.out.println("Liczba wskaźników dla trendu spadkowego: " + downwardTrendCount + "/" + allIndicatorsCount + " " + Colors.RED.getColor() + "Ostateczny trend: spadkowy" + Colors.RESET.getColor());
-        summary = -1;
+            summary = -1;
         } else {
             System.out.println("Liczba wskaźników dla braku wyraźnego trendu: " + noClearTrendCount + "/" + allIndicatorsCount + " " + Colors.WHITE.getColor() + "Ostateczny trend: Brak wyraźnego trendu" + Colors.RESET.getColor());
-        summary = 0;
+            summary = 0;
         }
 
-        return summary;
+//        return summary;
     }
 
     public boolean isPositionIsOpen() {

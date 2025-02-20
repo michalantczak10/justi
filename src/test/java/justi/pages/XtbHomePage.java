@@ -398,7 +398,6 @@ public class XtbHomePage {
         // driver.findElement(search).sendKeys(Keys.ENTER);
         reusable.waitForVisibilityOfElementAndClick(XTB_HOME_PAGE.getExpectedPageTitle(), buyButton);
         reusable.waitForVisibilityOfElementAndClick(XTB_HOME_PAGE.getExpectedPageTitle(), applyButton);
-
     }
 
     public void closePosition() {
@@ -406,6 +405,5 @@ public class XtbHomePage {
         reusable.waitForVisibilityOfElementAndClick(XTB_HOME_PAGE.getExpectedPageTitle(), closeButton);
         // justi.reusable.waitForVisibilityOfElement(popupConfirmTradeDraggable);
         reusable.waitForVisibilityOfElementAndClick(XTB_HOME_PAGE.getExpectedPageTitle(), applyButton);
-
     }
 }

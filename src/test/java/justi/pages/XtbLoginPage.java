@@ -3,8 +3,6 @@ package justi.pages;
 import justi.reusable.Reusable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import static java.lang.Thread.sleep;
 import static justi.enums.ExpectedPageTitles.XTB_LOGIN_PAGE;
 
 public class XtbLoginPage {
